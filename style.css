@@ -158,13 +158,17 @@ body {
 }
 
 /********* SOLD OUT **********/
-.sold_out {
+.card.sold-out img {
   opacity: 0.3;
 }
 
-.sold_out_button {
+.card.sold-out .card_button {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+.card.sold-out .price {
+  display: none;
 }
 
 /********** MEDIA QUERIES **********/
