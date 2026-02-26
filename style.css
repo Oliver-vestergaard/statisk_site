@@ -157,6 +157,10 @@ body {
   padding-bottom: 1rem;
 }
 
+.availeble {
+  color: green;
+}
+
 /********* SOLD OUT **********/
 .card.sold-out img {
   opacity: 0.3;
@@ -169,6 +173,17 @@ body {
 
 .card.sold-out .price {
   display: none;
+}
+
+/********** ON SALE **********/
+.card.on-sale .price {
+  text-decoration: line-through;
+  color: red;
+}
+
+.card.on-sale .new_price {
+  color: green;
+  font-weight: bold;
 }
 
 /********** MEDIA QUERIES **********/
