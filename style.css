@@ -125,6 +125,7 @@ body {
 
 .brand {
   text-align: right;
+  grid-column: 2 / 3;
 }
 /*********** Product Page **********/
 
@@ -171,10 +172,15 @@ body {
   cursor: not-allowed;
 }
 
-.card.sold-out .price {
+.card.sold-out .price .new_price {
   display: none;
 }
 
+/**********INSTOCK**********/
+
+.InStock .hide {
+  display: none;
+}
 /********** ON SALE **********/
 .card.on-sale .price {
   text-decoration: line-through;
@@ -182,8 +188,10 @@ body {
 }
 
 .card.on-sale .new_price {
+  display: block;
   color: green;
   font-weight: bold;
+  text-align: right;
 }
 
 /********** MEDIA QUERIES **********/
