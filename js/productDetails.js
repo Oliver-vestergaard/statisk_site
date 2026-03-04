@@ -1,4 +1,9 @@
-const id = 1528;
+//const id = 1528;
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
+
+console.log("id:", id);
+
 const productURL = "https://kea-alt-del.dk/t7/api/products/" + id;
 const productcontainer = document.querySelector("#productContainer");
 
@@ -21,7 +26,10 @@ function show(data) {
 
             <div class="product_info">
                 <p> ${data.price} Dkk </p>
-                <p class="availeble">${data.soldout ? "Ikke på lager" : "På lager"}</p>
+                
+                <p class="availeble ${data.soldout ? "soldout" : "instock"}">
+  ${data.soldout ? "Ikke på lager" : "På lager"}
+</p>
 
                 <button class="card_button">Læg i kurv</button>
 

@@ -1,4 +1,8 @@
-const listURL = "https://kea-alt-del.dk/t7/api/products?limit=50";
+const params = new URLSearchParams(window.location.search);
+const category = params.get("category");
+
+const listURL = `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(category)}&limit=50`;
+
 const listContainer = document.querySelector(".product-gallery");
 
 function getProducts() {
@@ -34,23 +38,26 @@ function showProducts(products) {
    
    
     <article class="card ${soldOutClass} ${discountClass}">
-   <h3>${product.productdisplayname}</h3>
+  <div>
+    <h3>${product.productdisplayname}</h3>
+ <p class="brand">${product.brandname}</p>
 
+  </div>
    <img src="https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp" alt="${product.productdisplayname}" />
    <div class="grid_1-1">
     
    
-   <p class="on-sale price">${product.price}</p>
+   <p class="on-sale price">${product.price} DKK</p>
     
      
- <p class="new_price ">${newPrice}</p>
+ <p class="new_price hide ">${newPrice} DKK</p>
      
        
-      <p class="hide">SOLD OUT</p>
-     <p class="brand">${product.brandname}</p>
+      <p class="hide SoldOutText">SOLD OUT</p>
+    
    </div>
    <div class="button_container">
-     <a class="card_button" href="product.html">
+     <a class="card_button" href="product.html?id=${product.id}">
        Køb nu
      </a>
    </div>

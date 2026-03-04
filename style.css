@@ -34,7 +34,7 @@ h2 {
 h3 {
   font-family: "Arimo", sans-serif;
   color: #110e0e;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-top: 15px;
 }
 
@@ -77,6 +77,13 @@ body {
   text-decoration: none;
 }
 
+.index_button:hover {
+  border: 2px solid white;
+  transform: scale(0.98);
+  background-color: transparent;
+  color: white;
+}
+
 /********** Product List **********/
 .card {
   display: flex;
@@ -86,6 +93,11 @@ body {
   gap: 15px;
   padding: 1rem;
   background-color: #cecece;
+  position: relative;
+}
+
+.price {
+  padding-bottom: 1rem;
 }
 
 .card img {
@@ -102,29 +114,28 @@ body {
 }
 
 .button_container {
-  padding: 1rem;
-  margin: 0 auto;
-
-  border: 2px solid black;
+  padding-bottom: 1rem;
 }
-.card_button {
-  padding: 1rem;
 
+.card_button {
+  border: 1px solid black;
+  background-color: rgb(37, 37, 37);
+  padding: 1rem;
+  color: rgb(216, 216, 216);
   text-decoration: none;
 }
 
-.button_container:hover {
-  background-color: white;
+.card_button:hover {
+  background-color: rgb(216, 216, 216);
   transform: scale(1.05);
+  color: rgb(37, 37, 37);
 }
-
 .grid_1-1 {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .brand {
-  text-align: right;
   grid-column: 2 / 3;
 }
 /*********** Product Page **********/
@@ -162,6 +173,10 @@ body {
   color: green;
 }
 
+.soldout {
+  color: red;
+}
+
 /********* SOLD OUT **********/
 .card.sold-out img {
   opacity: 0.3;
@@ -176,6 +191,18 @@ body {
   display: none;
 }
 
+.SoldOutText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
+
+  z-index: 10;
+}
 /**********INSTOCK**********/
 
 .InStock .hide {
@@ -224,7 +251,6 @@ body {
   /********** Product List **********/
 
   .container {
-    max-width: 1200px;
     margin: 0 auto;
   }
 
@@ -242,11 +268,8 @@ body {
     grid-row: span 4;
   }
 
-  .button_container {
-    padding: 1rem;
-  }
   .card_button {
-    padding: 1rem;
+    padding: 0.5rem;
     font-size: 1rem;
   }
   /********** Product Page **********/
