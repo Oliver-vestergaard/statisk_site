@@ -41,7 +41,7 @@ h3 {
 p {
   font-family: "Arimo", sans-serif;
   color: #110e0e;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   max-width: 65ch;
 }
 
@@ -85,6 +85,60 @@ body {
 }
 
 /********** Product List **********/
+
+.visibilityHide {
+  display: none;
+}
+
+.DiscountProcent {
+  background-color: red;
+  width: fit-content;
+  padding: 0.3rem;
+  border-radius: 10px;
+  margin-bottom: 0.7rem;
+}
+
+.DiscountProcent p {
+  text-align: center;
+  font-size: 15px;
+  color: white;
+}
+
+.DealMark {
+  background-color: red;
+  width: fit-content;
+  padding: 0.3rem;
+  margin-bottom: 0.7rem;
+  position: absolute;
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.DealMark p {
+  text-align: center;
+  font-size: 15px;
+  color: white;
+}
+
+.grid_1-1 .Productlisth2 {
+  color: #cecece;
+}
+
+.SortPriceBtnContainer {
+  padding-left: 4rem;
+}
+
+.SortByPrice {
+  border: 1px solid black;
+  background-color: rgb(37, 37, 37);
+  padding: 1rem;
+  color: rgb(216, 216, 216);
+  text-decoration: none;
+  border: 1px solid white;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -94,9 +148,15 @@ body {
   padding: 1rem;
   background-color: #cecece;
   position: relative;
+  border-radius: 10px;
+}
+
+.productListName {
+  margin-top: 0rem;
 }
 
 .price {
+  font-weight: lighter;
   padding-bottom: 1rem;
 }
 
@@ -136,7 +196,7 @@ body {
 }
 
 .brand {
-  grid-column: 2 / 3;
+  align-self: end;
 }
 /*********** Product Page **********/
 
@@ -146,13 +206,27 @@ body {
 }
 
 .product_imgs {
-  border: 4px solid black;
   display: block;
-  cursor: pointer;
+}
+
+#ProcentMark {
+  text-align: center;
+  font-size: 15px;
+  color: white;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .primary_img {
   padding: 1rem;
+}
+
+#new_priceProductDet {
+  font-size: 1.7rem;
+  font-weight: bold;
+
+  display: block;
+  color: green;
 }
 
 .product_info {
@@ -160,6 +234,11 @@ body {
   flex-direction: column;
   align-items: center;
   padding-bottom: 3rem;
+}
+
+li {
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .product_info p {
@@ -173,8 +252,8 @@ body {
   color: green;
 }
 
-.soldout {
-  color: red;
+.soldoutProduct {
+  color: #de0000;
 }
 
 /********* SOLD OUT **********/
@@ -187,7 +266,15 @@ body {
   cursor: not-allowed;
 }
 
-.card.sold-out .price .new_price {
+.card.sold-out .new_price {
+  display: none;
+}
+
+.card.sold-out .SoldOutText {
+  display: block;
+}
+
+.SoldOutText {
   display: none;
 }
 
@@ -211,14 +298,21 @@ body {
 /********** ON SALE **********/
 .card.on-sale .price {
   text-decoration: line-through;
-  color: red;
+}
+
+.new_price {
+  display: none;
 }
 
 .card.on-sale .new_price {
   display: block;
   color: green;
-  font-weight: bold;
+
   text-align: right;
+}
+
+.ProductOnSale {
+  text-decoration: line-through;
 }
 
 /********** MEDIA QUERIES **********/
@@ -250,6 +344,10 @@ body {
 
   /********** Product List **********/
 
+  .FlexGrid {
+    display: flex;
+  }
+
   .container {
     margin: 0 auto;
   }
@@ -265,7 +363,7 @@ body {
   .card {
     display: grid;
     grid-template-rows: subgrid;
-    grid-row: span 4;
+    grid-row: span 5;
   }
 
   .card_button {

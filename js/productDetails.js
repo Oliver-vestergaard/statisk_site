@@ -12,6 +12,16 @@ function getData() {
 }
 
 function show(data) {
+  const discount = data.discount;
+
+  let newPrice = "";
+
+  if (discount > 0) {
+    newPrice = Math.round(data.price * (1 - data.discount / 100));
+  } else {
+    discountClass = "";
+  }
+
   productcontainer.innerHTML = `
   <h1>Product Details</h1>
         <div class="product_info_grid">
@@ -25,7 +35,18 @@ function show(data) {
 
 
             <div class="product_info">
-                <p> ${data.price} Dkk </p>
+               ${data.discount > 0 ? `<p id="new_priceProductDet">${newPrice} Dkk</p>` : ""}
+                <p> <span> ${data.discount > 0 ? "Normalpris:" : ""} <span class="${data.discount > 0 ? "ProductOnSale" : ""}"> ${data.price} Dkk </span> </p>
+                 
+                
+                ${
+                  data.discount > 0
+                    ? ` <div class="DiscountProcent"> <p id="ProcentMark"> ${data.discount}% </p>   
+    </div>`
+                    : ""
+                }
+                
+            
                 
                 <p class="availeble ${data.soldout ? "soldout" : "instock"}">
   ${data.soldout ? "Ikke på lager" : "På lager"}
