@@ -4,9 +4,19 @@ const category = params.get("category");
 const listURL = `https://kea-alt-del.dk/t7/api/products?category=${encodeURIComponent(category)}&limit=50`;
 
 const listContainer = document.querySelector(".product-gallery");
+const sortButton = document.querySelector(".SortByPrice");
+const filterButton = document.querySelector(".filterbtn");
+const ShowAll = document.querySelector(".ShowAllProducts");
+
+let products = [];
 
 function getProducts() {
-  fetch(listURL).then((res) => res.json().then((products) => showProducts(products)));
+  fetch(listURL)
+    .then((res) => res.json())
+    .then((data) => {
+      products = data; // gem i den globale variabel
+      showProducts(products);
+    });
 }
 
 function showProducts(products) {
@@ -16,17 +26,16 @@ function showProducts(products) {
   // products er et array af objekter
 
   products.forEach((product) => {
+    //SOLDOUT
     let soldOutClass = "";
 
-    if (product.soldout === 1) {
-      soldOutClass = "sold-out";
-    } else {
-      soldOutClass = "InStock";
-    }
+    product.soldout === 1 ? (soldOutClass = "sold-out") : (soldOutClass = "InStock");
+
+    // DISCOUNT
 
     let discountClass = "";
     let newPrice = "";
-    // DISCOUNT
+
     if (product.discount > 0) {
       discountClass = "on-sale";
       newPrice = Math.round(product.price * (1 - product.discount / 100));
@@ -37,27 +46,51 @@ function showProducts(products) {
     listContainer.innerHTML += `
    
    
+
     <article class="card ${soldOutClass} ${discountClass}">
+   
   <div>
-    <h3>${product.productdisplayname}</h3>
- <p class="brand">${product.brandname}</p>
+    <h3 class="productListName">${product.productdisplayname}</h3>
+
 
   </div>
-   <img src="https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp" alt="${product.productdisplayname}" />
+   <p class="brand">${product.brandname}</p>
+
+<div>
+        ${
+          product.discount > 0
+            ? ` <div class="DealMark"> <p> DEAL </p>   
+    </div>`
+            : ""
+        }
+   <img class="Product_img" src="https://kea-alt-del.dk/t7/images/webp/640/${product.id}.webp" alt="${product.productdisplayname}" />
+</div>
+
    <div class="grid_1-1">
     
    
-   <p class="on-sale price">${product.price} DKK</p>
-    
-     
- <p class="new_price hide ">${newPrice} DKK</p>
-     
-       
-      <p class="hide SoldOutText">SOLD OUT</p>
-    
+  <p class="price">${product.price} DKK</p>
+<p class="new_price  ${product.discount === 0 ? "visibilityHide" : ""}">${newPrice} DKK</p>
+<p class="SoldOutText">SOLD OUT</p>
+
+   
+    ${
+      product.discount > 0
+        ? ` <div class="DiscountProcent"> <p> ${product.discount}% </p>   
+    </div>`
+        : ""
+    }
+
+ 
+
+  
+
+
+
+
    </div>
-   <div class="button_container">
-     <a class="card_button" href="product.html?id=${product.id}">
+   <div class="button_container">  
+       <a class="card_button" href="product.html?id=${product.id}">
        Køb nu
      </a>
    </div>
@@ -65,5 +98,19 @@ function showProducts(products) {
     `;
   });
 }
+
+function SortérPris() {
+  const sorted = [...products].sort((a, b) => a.price - b.price);
+  showProducts(sorted);
+}
+
+function filtrér(targetGender) {
+  const filtered = products.filter((product) => (product.gender || "").toLowerCase() === targetGender.toLowerCase());
+  showProducts(filtered);
+}
+
+sortButton.addEventListener("click", SortérPris);
+filterButton.addEventListener("click", () => filtrér("women"));
+ShowAll.addEventListener("click", () => showProducts(products));
 
 getProducts();
